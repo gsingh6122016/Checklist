@@ -5,12 +5,13 @@ import classes from './Controls.module.css';
 const Controls = (props) => {
     return (
         <div className={classes.Controls}>
-            <p>Current Price: <strong>1000</strong></p>
+            <p>Current Price: <strong>{props.totalPrice}</strong></p>
             {
                 props.products.map(product => (
                     <Control key={product.id}
                      productname={product.name}
-                     
+                     added={() => props.productAdded(product.id)}
+                     removed={() => props.productRemoved(product.id)}
                      count = {product.count} />
                 ))
             }

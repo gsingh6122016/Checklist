@@ -17,6 +17,7 @@ class ChecklistBuilder extends Component {
         .then(response => {
 
             const products = response.data;
+           
             const updatedproducts = products.map(product => {
                 return {
                     ...product,
@@ -37,19 +38,40 @@ class ChecklistBuilder extends Component {
    
 
     addProductHandler = (id) => {
-        const oldCount = this.state.products[id].count;
+        const oldCount = this.state.products[id-1].count;
         const updatedCount = oldCount + 1;
 
-        const products = {...this.state.products};
+        const products = [...this.state.products];
+       
+        const updatedproducts = products.map(product => {
+            return {
+                ...product,
+            }
+        });
+        updatedproducts[id-1].count = updatedCount;
+        const priceAdddition = parseInt(updatedproducts[id-1].price);
+            const oldPrice = this.state.totalPrice;
+            const newPrice = oldPrice + priceAdddition;
+        this.setState({totalPrice: newPrice, products: updatedproducts})
+    }
+
+    removeProductHandler = (id) => {
+        const oldCount = this.state.products[id-1].count;
+        if (oldCount <= 0) {
+                    return;
+                }
+        const updatedCount = oldCount - 1;
+
+        const products = [...this.state.products];
         const updatedproducts = products.map(product => {
             return {
                 ...product
             }
         });
-        updatedproducts[id].count = updatedCount;
-        const priceAdddition = updatedproducts[id].price;
+        updatedproducts[id-1].count = updatedCount;
+        const priceAdddition = parseInt(updatedproducts[id-1].price);
             const oldPrice = this.state.totalPrice;
-            const newPrice = oldPrice + priceAdddition;
+            const newPrice = oldPrice - priceAdddition;
         this.setState({totalPrice: newPrice, products: updatedproducts})
     }
 
@@ -58,11 +80,16 @@ class ChecklistBuilder extends Component {
         let controls = this.state.error ? <h1>Something went wrong !!!</h1> : <Spinner />
         
         if(this.state.products){
-            controls = (<Controls products={this.state.products} />);
+            controls = (<Controls
+                        totalPrice = {this.state.totalPrice}
+                         productAdded = {this.addProductHandler}
+                         productRemoved = {this.removeProductHandler}
+                         products={this.state.products} />);
         }
 
         return (
             <div>
+                <h1>SHOPING LIST</h1>
                 {controls}
             </div>
         );
