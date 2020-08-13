@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <ChecklistBuilder />
-      <p>hi, how r u</p>
+      
     </div>
   );
 }
