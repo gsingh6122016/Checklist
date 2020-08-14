@@ -118,7 +118,7 @@ class ChecklistBuilder extends Component {
                 disabledInfo[key].count = disabledInfo[key].count <= 0
             }
 
-         console.log(disabledInfo);
+         
 
             controls = (<Controls
                         totalPrice = {this.state.totalPrice}

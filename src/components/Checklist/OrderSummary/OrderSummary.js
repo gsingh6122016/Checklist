@@ -4,9 +4,9 @@ import classes from './OrderSummary.module.css';
 
 class OrderSummary extends Component {
 
-    // componentDidUpdate () {
-    //     console.log("ordered summary will update");
-    // }
+    componentDidUpdate () {
+        console.log("ordered summary will update");
+    }
 
     render () {
 
