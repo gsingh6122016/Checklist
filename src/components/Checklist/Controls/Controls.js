@@ -10,8 +10,10 @@ const Controls = (props) => {
                 props.products.map(product => (
                     <Control key={product.id}
                      productname={product.name}
+                     details ={() => props.productDetails(product.id)}
                      added={() => props.productAdded(product.id)}
                      removed={() => props.productRemoved(product.id)}
+                     disabled ={props.disabled[product.id-1].count}
                      count = {product.count} />
                 ))
             }

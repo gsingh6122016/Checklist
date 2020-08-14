@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from '../../axios-orders';
 import Controls from '../../components/Checklist/Controls/Controls';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderedSummary from '../../components/Checklist/OrderSummary/OrderSummary';
 
 class ChecklistBuilder extends Component {
 
@@ -9,8 +11,10 @@ class ChecklistBuilder extends Component {
         products: null,
         totalPrice: 0,
         spinner: true,
-        error: false
-    }
+        error: false,
+        details: false,
+        currentIndex: 0,
+      }
 
     componentDidMount () {
         axios.get('product')
@@ -74,21 +78,59 @@ class ChecklistBuilder extends Component {
             const newPrice = oldPrice - priceAdddition;
         this.setState({totalPrice: newPrice, products: updatedproducts})
     }
+ 
+ productDetailsHandler = (id) => {
+     this.setState({currentIndex: id-1, details: true});
+ }
+
+    detailCancelHandler = () => {
+        this.setState({details: false});
+    }
 
     render() {
+        
 
         let controls = this.state.error ? <h1>Something went wrong !!!</h1> : <Spinner />
-        
+        let orderSummary = null;
+
         if(this.state.products){
+
+            const disabledInfo1 = [...this.state.products];
+       
+            const disabledInfo = disabledInfo1.map(product => {
+                return {
+                    ...product
+                }
+            });
+          
+            for (let key in disabledInfo) {
+                disabledInfo[key].count = disabledInfo[key].count <= 0
+            }
+
+         console.log(disabledInfo);
+
             controls = (<Controls
                         totalPrice = {this.state.totalPrice}
+                        disabled = {disabledInfo}
                          productAdded = {this.addProductHandler}
                          productRemoved = {this.removeProductHandler}
+                         productDetails = {this.productDetailsHandler}
                          products={this.state.products} />);
+
+        orderSummary = <OrderedSummary 
+                         product={this.state.products[this.state.currentIndex]}
+            
+                         />;
+
+                       
+
         }
 
         return (
             <div>
+                <Modal show={this.state.details} modalClosed={this.detailCancelHandler}>
+                   {orderSummary}
+                </Modal>
                 <h1>SHOPING LIST</h1>
                 {controls}
             </div>
