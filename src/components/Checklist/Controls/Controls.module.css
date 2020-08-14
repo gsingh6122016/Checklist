@@ -2,9 +2,23 @@
     width: 100%;
     background-color: #CF8F2E;
     display: flex;
-    flex-flow: column;
     align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     box-shadow: 0 2px 1px #ccc;
     margin: auto;
     padding: 10px 0;
+}
+
+.Price {
+    border: 1px solid beige;
+    padding: 0px 10px;
+    width:320px;
+    box-sizing: border-box;
+    margin: 2px;
+    background-color: bisque;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 0px;
+    font-size: large;
 }

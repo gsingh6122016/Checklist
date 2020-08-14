@@ -4,6 +4,8 @@ import Controls from '../../components/Checklist/Controls/Controls';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderedSummary from '../../components/Checklist/OrderSummary/OrderSummary';
+import Aux from '../../hoc/auxiliary';
+import classes from './ChecklistBuilder.module.css';
 
 class ChecklistBuilder extends Component {
 
@@ -14,6 +16,7 @@ class ChecklistBuilder extends Component {
         error: false,
         details: false,
         currentIndex: 0,
+        totalCount: 0
       }
 
     componentDidMount () {
@@ -56,7 +59,11 @@ class ChecklistBuilder extends Component {
         const priceAdddition = parseInt(updatedproducts[id-1].price);
             const oldPrice = this.state.totalPrice;
             const newPrice = oldPrice + priceAdddition;
-        this.setState({totalPrice: newPrice, products: updatedproducts})
+
+        const oldTotalCount = this.state.totalCount;
+        const newTotalCount = oldTotalCount + 1;
+
+        this.setState({totalPrice: newPrice, products: updatedproducts, totalCount: newTotalCount})
     }
 
     removeProductHandler = (id) => {
@@ -76,7 +83,11 @@ class ChecklistBuilder extends Component {
         const priceAdddition = parseInt(updatedproducts[id-1].price);
             const oldPrice = this.state.totalPrice;
             const newPrice = oldPrice - priceAdddition;
-        this.setState({totalPrice: newPrice, products: updatedproducts})
+
+            const oldTotalCount = this.state.totalCount;
+            const newTotalCount = oldTotalCount - 1;
+
+        this.setState({totalPrice: newPrice, products: updatedproducts, totalCount: newTotalCount})
     }
  
  productDetailsHandler = (id) => {
@@ -111,6 +122,7 @@ class ChecklistBuilder extends Component {
 
             controls = (<Controls
                         totalPrice = {this.state.totalPrice}
+                        totalCount = {this.state.totalCount}
                         disabled = {disabledInfo}
                          productAdded = {this.addProductHandler}
                          productRemoved = {this.removeProductHandler}
@@ -127,13 +139,17 @@ class ChecklistBuilder extends Component {
         }
 
         return (
-            <div>
+            <Aux>
+                <div className ={classes.ChecklistBuilder} >
+                <header>SHOPING LIST</header>
                 <Modal show={this.state.details} modalClosed={this.detailCancelHandler}>
                    {orderSummary}
                 </Modal>
-                <h1>SHOPING LIST</h1>
+                
                 {controls}
             </div>
+            </Aux>
+            
         );
     }
 }

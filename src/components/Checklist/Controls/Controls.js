@@ -5,7 +5,10 @@ import classes from './Controls.module.css';
 const Controls = (props) => {
     return (
         <div className={classes.Controls}>
-            <p>Current Price: <strong>{props.totalPrice}</strong></p>
+            <div className={classes.Price} >
+                <p>To Pay: <strong> INR {props.totalPrice}</strong> </p> 
+                 <p>You have Selected <strong>{props.totalCount} items.</strong>  </p>
+            </div>
             {
                 props.products.map(product => (
                     <Control key={product.id}

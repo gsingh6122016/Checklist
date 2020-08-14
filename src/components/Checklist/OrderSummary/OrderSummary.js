@@ -12,9 +12,12 @@ class OrderSummary extends Component {
 
         const orderSummary = Object.keys(this.props.product)
         .map(proKey => {
-        return <li key={proKey}>
+            if(proKey !== 'id' && proKey !== 'count' && proKey !== 'createdAt'){
+                return <li key={proKey}>
                  <span style={{textTransform: 'capitalize'}}>{proKey}</span>: {this.props.product[proKey]}
                </li>
+            }
+        
         });
 
         return (
