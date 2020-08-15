@@ -3,6 +3,7 @@ import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderedSummary from '../../components/Checklist/OrderSummary/OrderSummary';
 
+
 class Details extends Component {
 
 
@@ -38,7 +39,6 @@ class Details extends Component {
         if(this.state.products){
             orderSummary = <OrderedSummary 
             product={this.state.products}
-
             />;
         }
       
@@ -46,6 +46,8 @@ class Details extends Component {
         return (
             <div>
                 {orderSummary}
+                
+                
             </div>
         );
     }

@@ -13,6 +13,7 @@ const Home = () => {
             <h3>click on any item to show details.</h3>
         </div>
         <Logo />
+        
         </Aux>
         
     );
