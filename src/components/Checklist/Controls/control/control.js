@@ -11,7 +11,7 @@ const control = (props) => {
         <div className={classes.Control}>
         <div className={classes.logo}> <ProductLogo /></div>   
         <div className={classes.Label} >
-        <Link to= {'/products/' + props.productid} >
+        <Link to= {'products/' + props.productid} >
             {props.productname}
         </Link>
         </div>

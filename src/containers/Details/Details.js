@@ -11,8 +11,10 @@ class Details extends Component {
         spinner:true,
         errror: false
     }
+  
 
     componentDidMount () {
+        console.log(this.props.match.params);
         axios.get('product/'+ this.props.match.params.id)
         .then(response => {
 
