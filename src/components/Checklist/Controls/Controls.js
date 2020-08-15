@@ -11,7 +11,9 @@ const Controls = (props) => {
             </div>
             {
                 props.products.map(product => (
-                    <Control key={product.id}
+                    <Control 
+                     key={product.id}
+                     productid={product.id}
                      productname={product.name}
                      details ={() => props.productDetails(product.id)}
                      added={() => props.productAdded(product.id)}

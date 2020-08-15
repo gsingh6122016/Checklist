@@ -14,7 +14,7 @@ class OrderSummary extends Component {
         .map(proKey => {
             if(proKey !== 'id' && proKey !== 'count' && proKey !== 'createdAt'){
                 return <li key={proKey}>
-                 <span style={{textTransform: 'capitalize'}}>{proKey}</span>: {this.props.product[proKey]}
+                 <span style={{textTransform: 'capitalize',fontSize: 'large'}}>{proKey}</span>: <span style={{textTransform: 'capitalize',fontSize: 'large',fontWeight: 'bold'}}>{this.props.product[proKey]}</span>
                </li>
             }
         
@@ -22,8 +22,8 @@ class OrderSummary extends Component {
 
         return (
             <Aux>
-            <h3>Product Description</h3>
-            <p>An awesome product with the following details:</p>
+            <h1>Product Description</h1>
+            <h3>An awesome product with the following details:</h3>
             <ul >
                 {orderSummary}
             </ul>

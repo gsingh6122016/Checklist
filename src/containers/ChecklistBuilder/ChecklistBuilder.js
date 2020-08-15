@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from '../../axios-orders';
 import Controls from '../../components/Checklist/Controls/Controls';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Modal from '../../components/UI/Modal/Modal';
-import OrderedSummary from '../../components/Checklist/OrderSummary/OrderSummary';
 import Aux from '../../hoc/auxiliary';
 import classes from './ChecklistBuilder.module.css';
 
@@ -14,8 +12,6 @@ class ChecklistBuilder extends Component {
         totalPrice: 0,
         spinner: true,
         error: false,
-        details: false,
-        currentIndex: 0,
         totalCount: 0
       }
 
@@ -90,9 +86,9 @@ class ChecklistBuilder extends Component {
         this.setState({totalPrice: newPrice, products: updatedproducts, totalCount: newTotalCount})
     }
  
- productDetailsHandler = (id) => {
-     this.setState({currentIndex: id-1, details: true});
- }
+//  productDetailsHandler = (id) => {
+//      this.setState({currentIndex: id-1, details: true});
+//  }
 
     detailCancelHandler = () => {
         this.setState({details: false});
@@ -102,7 +98,7 @@ class ChecklistBuilder extends Component {
         
 
         let controls = this.state.error ? <h1>Something went wrong !!!</h1> : <Spinner />
-        let orderSummary = null;
+       
 
         if(this.state.products){
 
@@ -126,13 +122,10 @@ class ChecklistBuilder extends Component {
                         disabled = {disabledInfo}
                          productAdded = {this.addProductHandler}
                          productRemoved = {this.removeProductHandler}
-                         productDetails = {this.productDetailsHandler}
+                        //  productDetails = {this.productDetailsHandler}
                          products={this.state.products} />);
 
-        orderSummary = <OrderedSummary 
-                         product={this.state.products[this.state.currentIndex]}
-            
-                         />;
+       
 
                        
 
@@ -141,10 +134,7 @@ class ChecklistBuilder extends Component {
         return (
             <Aux>
                 <div className ={classes.ChecklistBuilder} >
-                <header>SHOPING LIST</header>
-                <Modal show={this.state.details} modalClosed={this.detailCancelHandler}>
-                   {orderSummary}
-                </Modal>
+                <header>PRODUCTS LIST</header>
                 
                 {controls}
             </div>
