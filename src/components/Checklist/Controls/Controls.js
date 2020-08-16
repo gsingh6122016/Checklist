@@ -15,7 +15,7 @@ const Controls = (props) => {
                      key={product.id}
                      productid={product.id}
                      productname={product.name}
-                     details ={() => props.productDetails(product.id)}
+                     
                      added={() => props.productAdded(product.id)}
                      removed={() => props.productRemoved(product.id)}
                      disabled ={props.disabled[product.id-1].count}

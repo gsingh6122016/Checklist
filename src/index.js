@@ -5,15 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom' ;
 import  { Provider } from 'react-redux'; 
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import checklistReducer from './Store/reducers/checklist';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(checklistReducer, composeEnhancers(
-  applyMiddleware(thunk)
-));
+import store  from './store';
 
 
 const app = (

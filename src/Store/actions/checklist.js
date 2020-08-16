@@ -23,6 +23,12 @@ export const setProducts = (products) => {
     }
 }
 
+export const fetchIngredientsFailed = () => {
+    return {
+        type: actionTypes.FETCH_PRODUCTS_FAILED
+    }
+}
+
 export const initProducts = () => {
     return dispatch => {
         axios.get('product')
@@ -38,7 +44,7 @@ export const initProducts = () => {
             dispatch(setProducts(updatedproducts));
         })
         .catch(error => {
-      console.log(error);
+            dispatch(fetchIngredientsFailed());
          } );
 };
 };

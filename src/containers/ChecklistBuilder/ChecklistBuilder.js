@@ -9,13 +9,13 @@ import * as actions from '../../Store/actions/index';
 
 class ChecklistBuilder extends Component {
 
-    state = {
-        // products: null,
-        totalPrice: 0,
-        spinner: true,
-        error: false,
-        totalCount: 0
-      }
+    // state = {
+    //     // products: null,
+    //     totalPrice: 0,
+    //     spinner: true,
+    //     error: false,
+    //     totalCount: 0
+    //   }
 
     // componentDidMount () {
     //     axios.get('product')
@@ -41,10 +41,15 @@ class ChecklistBuilder extends Component {
     //      } );
     // }
 
+  
+
     componentDidMount () {
+        console.log("fetch");
         this.props.oninitProducts();
     }
    
+ 
+
 
     // addProductHandler = (id) => {
     //     const oldCount = this.state.products[id-1].count;
@@ -103,7 +108,7 @@ class ChecklistBuilder extends Component {
     render() {
         
 
-        let controls = this.state.error ? <h1>Something went wrong !!!</h1> : <Spinner />
+        let controls = this.props.error ? <h1>Something went wrong !!!</h1> : <Spinner />
        
 
         if(this.props.products){
@@ -123,12 +128,11 @@ class ChecklistBuilder extends Component {
          
 
             controls = (<Controls
-                        totalPrice = {this.state.totalPrice}
-                        totalCount = {this.state.totalCount}
+                        totalPrice = {this.props.totalPrice}
+                        totalCount = {this.props.totalCount}
                         disabled = {disabledInfo}
-                        //  productAdded = {this.addProductHandler}
-                        //  productRemoved = {this.removeProductHandler}
-                        //  productDetails = {this.productDetailsHandler}
+                         productAdded = {this.props.onProductAdded}
+                         productRemoved = {this.props.onProductRemoved}
                          products={this.props.products} />);
 
        
@@ -150,11 +154,12 @@ class ChecklistBuilder extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        products: state.products
-    };
-}
+const mapStateToProps = state => ({
+products : state.products,
+error : state.error,
+totalCount: state.totalCount,
+totalPrice: state.totalPrice
+});
 
 const mapDispatchToProps = dispatch => {
     return {
